@@ -1,14 +1,15 @@
 const express = require('express');
-const app = express();
-
+const path = require('path');
 const morgan = require('morgan');
+
+const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(morgan('combined'));
-app.use('/pdf', express.static('pdfs'));
+app.use('/pdf', express.static(path.join(__dirname, 'pdfs')));
 
 app.get('/verify/AKMMF0985JMMFHFHDSSD', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(PORT, () => {
